@@ -1,0 +1,11 @@
+1. alt + cmd + T - Surround with... (if..else, try..catch, for, etc.)
+2. alt + up/down - select blocks
+3. alt + cmd +L - reformat code
+4. cmd + D - duplicate current line or selected block
+5. shift + cmd + U - toggle upper / lower case of selected text
+6. alt + delete - delete to word start
+7. cmd + J - insert live template
+8. eco - echo statement
+9. fore - foreach
+10. forek  - foreach associative array
+11. inc / rqr - include / require
