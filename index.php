@@ -13,47 +13,47 @@
     </head>
     <body>
         <!-- Responsive navbar-->
-        <?php include_once 'includes/ui/navbar.php'?>
+        <?php include_once 'templates/navbar.php' ?>
         <!-- Page header with logo and tagline-->
-        <?php include_once 'includes/ui/header.php'?>
+        <?php include_once 'templates/header.php' ?>
         <!-- Page content-->
         <div class="container">
             <div class="row">
                 <!-- Blog entries-->
                 <div class="col-lg-8">
                     <!-- Featured blog post-->
-                    <?php include 'includes/ui/blog_post.php'?>
+                    <?php include 'templates/blog_post.php' ?>
                     <!-- Nested row for non-featured blog posts-->
                     <div class="row">
                         <div class="col-lg-6">
                             <!-- Blog post-->
-                            <?php include 'includes/ui/blog_post.php'?>
+                            <?php include 'templates/blog_post.php' ?>
                             <!-- Blog post-->
-                            <?php include 'includes/ui/blog_post.php'?>
+                            <?php include 'templates/blog_post.php' ?>
                         </div>
                         <div class="col-lg-6">
                             <!-- Blog post-->
-                            <?php include 'includes/ui/blog_post.php'?>
+                            <?php include 'templates/blog_post.php' ?>
                             <!-- Blog post-->
-                            <?php include 'includes/ui/blog_post.php'?>
+                            <?php include 'templates/blog_post.php' ?>
                         </div>
                     </div>
                     <!-- Pagination-->
-                    <?php include_once 'includes/ui/pagination.php'?>
+                    <?php include_once 'templatespagination.php' ?>
                 </div>
                 <!-- Side widgets-->
                 <div class="col-lg-4">
                     <!-- Search widget-->
-                    <?php include_once 'includes/ui/search.php'?>
+                    <?php include_once 'templates/search.php' ?>
                     <!-- Categories widget-->
-                    <?php include_once 'includes/ui/categories.php'?>
+                    <?php include_once 'templates/categories.php' ?>
                     <!-- Side widget-->
-                    <?php include_once 'includes/ui/side_card.php'?>
+                    <?php include_once 'templates/side_card.php' ?>
                 </div>
             </div>
         </div>
         <!-- Footer-->
-        <?php include_once 'includes/ui/footer.php'?>
+        <?php include_once 'templates/footer.php' ?>
         <!-- Bootstrap core JS-->
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
         <!-- Core theme JS-->
