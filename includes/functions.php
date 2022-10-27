@@ -11,3 +11,13 @@ function getCategories() {
 
     return $getCategories->fetchAll();
 }
+
+function getPosts() {
+    global $database_connection;
+
+    $query = 'SELECT * FROM posts';
+    $getPosts = $database_connection->prepare($query);
+    $getPosts->execute();
+
+    return $getPosts->fetchAll();
+}
