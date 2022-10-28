@@ -35,7 +35,7 @@
                     ?>
                     <!-- Nested row for non-featured blog posts-->
                     <div class="row">
-                            <div class="col-lg-6">
+                            <div class="col-lg-12">
                                 <!-- Blog post-->
                                 <?php foreach ($posts as $post) { ?>
                                     <div class="card mb-4">
