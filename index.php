@@ -17,7 +17,7 @@
         <!-- Page header with logo and tagline-->
         <?php include_once 'templates/header.php' ?>
         <!-- Page content-->
-        <?php include 'templates/posts.php'; ?>
+        <?php include 'templates/main_content.php'; ?>
         <!-- Footer-->
         <?php include_once 'templates/footer.php' ?>
         <!-- Bootstrap core JS-->
