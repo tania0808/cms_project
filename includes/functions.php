@@ -1,6 +1,6 @@
 <?php
 
-include_once 'includes/db_connection.php';
+include_once 'db_connection.php';
 
 function getCategories() {
     global $database_connection;
@@ -10,6 +10,16 @@ function getCategories() {
     $getCategories->execute();
 
     return $getCategories->fetchAll();
+}
+
+function addCategory() {
+    global $database_connection;
+    $title = $_POST['cat_title'];
+    $query = "INSERT INTO category (category_title) VALUES ('$title')";
+    $addCategory = $database_connection->prepare($query);
+    $addCategory->execute();
+
+    return $addCategory->fetchAll();
 }
 
 function getPosts() {

@@ -9,7 +9,7 @@ try {
             PDO::ATTR_EMULATE_PREPARES => false,
             PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION
         ]);
-    echo "Connected ! 🥰";
+    //echo "Connected ! 🥰";
 }
 catch (PDOException $e) {
     print 'Erreur !: ' . $e->getMessage() . '<br/>';

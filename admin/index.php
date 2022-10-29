@@ -36,9 +36,9 @@
         <!-- Navigation -->
         <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
             <!-- Top Menu Items -->
-            <?php include_once 'templates/header.php'; ?>
+            <?php include_once 'templates/admin_header.php'; ?>
             <!-- Sidebar Menu Items - These collapse to the responsive navigation menu on small screens -->
-            <?php include_once 'templates/sidebar_menu.php'; ?>
+            <?php include_once 'templates/admin_sidebar_menu.php'; ?>
             <!-- /.navbar-collapse -->
         </nav>
 

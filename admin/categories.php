@@ -36,9 +36,9 @@
     <!-- Navigation -->
     <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
         <!-- Top Menu Items -->
-        <?php include_once 'templates/header.php'; ?>
+        <?php include_once 'templates/admin_header.php'; ?>
         <!-- Sidebar Menu Items - These collapse to the responsive navigation menu on small screens -->
-        <?php include_once 'templates/sidebar_menu.php'; ?>
+        <?php include_once 'templates/admin_sidebar_menu.php'; ?>
         <!-- /.navbar-collapse -->
     </nav>
 
@@ -54,7 +54,13 @@
                         <small>Author</small>
                     </h1>
                     <div class="col-xs-6">
-                        <form action="">
+                        <?php
+                        include_once '../includes/functions.php';
+                        if (isset($_POST['submit'])){
+                            addCategory();
+                        }
+                        ?>
+                        <form action="categories.php" method="post">
                             <div class="form-group">
                                 <label for="cat_title">Add Category</label>
                                 <input class="form-control" type="text" name="cat_title">
@@ -63,6 +69,30 @@
                                 <button class="btn btn-primary" type="submit" name="submit">Add Category</button>
                             </div>
                         </form>
+                    </div>
+                    <div class="col-xs-6">
+                        <table class="table table-bordered table-hover">
+                            <thead>
+                            <tr>
+                                <th>Id</th>
+                                <th>Category title</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <?php include_once '../includes/functions.php';
+                            include_once '../includes/db_connection.php';
+
+                            $categories = getCategories();
+
+                            foreach ($categories as $category) { ?>
+
+                                <tr>
+                                    <td><?php echo $category['category_id']; ?></td>
+                                    <td><?php echo $category['category_title']; ?></td>
+                                </tr>
+                            <?php } ?>
+                            </tbody>
+                        </table>
                     </div>
 
                 </div>
