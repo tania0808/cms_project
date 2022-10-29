@@ -12,6 +12,7 @@ include_once 'includes/functions.php';
                     echo "<li class='nav-item'><a class='nav-link' href='#'>{$category['category_title']}</a></li>";
                 }
                 ?>
+                <li class='nav-item'><a class='nav-link' href='admin'>Admin</a></li>
                 </ul>
         </div>
     </div>
