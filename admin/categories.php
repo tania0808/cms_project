@@ -63,13 +63,19 @@ if (isset($_POST['edit'])) {
                         <form action="" method="post">
                             <div class="form-group">
                                 <label for="cat_title">Edit Category</label>
-                                <input class="form-control" type="text" name="new_title" value="
                                 <?php
+                                $title = null;
                                 if (!$_GET){
-                                    echo '';
+                                    $title = "";
                                 } else {
-                                    echo trim($_GET['category']);
-                                }?>">
+                                    $title = trim($_GET["category"]);
+                                }
+
+                                if (isset($_GET['edit_id'])) {
+                                    echo "<input class='form-control' type='text' name='new_title' value='$title'>";
+                                }
+                                ?>
+
 
                             </div>
                             <div class="form-group">
