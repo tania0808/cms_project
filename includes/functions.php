@@ -21,6 +21,12 @@ function addCategory() {
 
     return $addCategory->fetchAll();
 }
+function deleteCategory($id) {
+    global $database_connection;
+    $query = "DELETE FROM category WHERE category_id= '$id'";
+    $addCategory = $database_connection->prepare($query);
+    $addCategory->execute();
+}
 
 function getPosts() {
     global $database_connection;
