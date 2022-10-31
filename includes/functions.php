@@ -12,9 +12,8 @@ function getCategories() {
     return $getCategories->fetchAll();
 }
 
-function addCategory() {
+function addCategory($title) {
     global $database_connection;
-    $title = $_POST['cat_title'];
     $query = "INSERT INTO category (category_title) VALUES ('$title')";
     $addCategory = $database_connection->prepare($query);
     $addCategory->execute();
@@ -26,6 +25,13 @@ function deleteCategory($id) {
     $query = "DELETE FROM category WHERE category_id= '$id'";
     $addCategory = $database_connection->prepare($query);
     $addCategory->execute();
+}
+
+function editCategory($id, $newTitle) {
+    global $database_connection;
+    $query = "UPDATE category SET category_title = '$newTitle' WHERE category_id= '$id'";
+    $editCategory = $database_connection->prepare($query);
+    $editCategory->execute();
 }
 
 function getPosts() {

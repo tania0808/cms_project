@@ -1,8 +1,18 @@
 <?php
 include_once '../includes/functions.php';
-if(isset($_GET['id'])) deleteCategory($_GET['id']);
-?>
 
+if(isset($_GET['id'])){
+    deleteCategory($_GET['id']);
+    header("Location: categories.php");
+}
+
+
+if (isset($_POST['edit'])) {
+    editCategory($_GET['edit_id'], trim($_POST['new_title']));
+    header("Location: categories.php");
+}
+
+?>
 <?php include_once 'templates/head.php'; ?>
 <body>
 
@@ -31,12 +41,12 @@ if(isset($_GET['id'])) deleteCategory($_GET['id']);
                     <div class="col-xs-6">
                         <?php
                         include_once '../includes/functions.php';
-                        if (isset($_POST['submit'])){
+                        if (isset($_POST['cat_title'])){
                             $catTitle = $_POST['cat_title'];
                             if($catTitle == "" || empty($catTitle)) {
                                 echo 'This field should not be empty !!! 😇';
                             } else {
-                                addCategory();
+                                addCategory($catTitle);
                             }
                         }
                         ?>
@@ -47,6 +57,23 @@ if(isset($_GET['id'])) deleteCategory($_GET['id']);
                             </div>
                             <div class="form-group">
                                 <button class="btn btn-primary" type="submit" name="submit">Add Category</button>
+                            </div>
+                        </form>
+
+                        <form action="" method="post">
+                            <div class="form-group">
+                                <label for="cat_title">Edit Category</label>
+                                <input class="form-control" type="text" name="new_title" value="
+                                <?php
+                                if (!$_GET){
+                                    echo '';
+                                } else {
+                                    echo trim($_GET['category']);
+                                }?>">
+
+                            </div>
+                            <div class="form-group">
+                                <input class="btn btn-primary" type="submit" name="edit" value="Edit Category"/>
                             </div>
                         </form>
                     </div>
@@ -61,15 +88,15 @@ if(isset($_GET['id'])) deleteCategory($_GET['id']);
                             <tbody>
                             <?php include_once '../includes/functions.php';
                             include_once '../includes/db_connection.php';
-
                             $categories = getCategories();
 
                             foreach ($categories as $category) { ?>
-
                                 <tr>
                                     <td><?php echo $category['category_id']; ?></td>
                                     <td><?php echo $category['category_title']; ?></td>
                                     <td><a href="categories.php?id=<?php echo $category['category_id']?>">delete</a></td>
+                                    <td><a href="categories.php?category=<?php echo $category['category_title']?>&edit_id=<?php echo $category['category_id']?>">edit</a></td>
+
                                 </tr>
                             <?php } ?>
                             </tbody>
