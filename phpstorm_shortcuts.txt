@@ -9,3 +9,6 @@
 9. fore - foreach
 10. forek  - foreach associative array
 11. inc / rqr - include / require
+12. cmd + alt + T - surround with
+13. alt + shift + hold click
+14. ctrl + G - select occurrences
