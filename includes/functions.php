@@ -44,6 +44,16 @@ function getPosts() {
     return $getPosts->fetchAll();
 }
 
+function getOnePost($id) {
+    global $database_connection;
+
+    $query = "SELECT * FROM posts WHERE post_id = $id";
+    $getPost = $database_connection->prepare($query);
+    $getPost->execute();
+
+    return $getPost->fetch();
+}
+
 function addPost() {
     global $database_connection;
     $post_title = $_POST['title'];
@@ -77,6 +87,62 @@ function addPost() {
     ];
     $addPost = $database_connection->prepare($query);
     $addPost->execute($data);
+}
+
+function updatePost($id) {
+    global $database_connection;
+    $post_title = $_POST['title'];
+    $post_category = $_POST['category'];
+    $post_status = $_POST['status'];
+    $post_author = $_POST['author'];
+    $post_user = 'tania';
+    $post_image = $_FILES['image']['name'];
+    $post_image_temp = $_FILES['image']['tmp_name'];
+    $post_tags = $_POST['tags'];
+    $post_content = $_POST['content'];
+    $post_date = date('d-m-y');
+    $post_comments_count = 4;
+    $old_image_name = $_POST['old_image_name'];
+
+    move_uploaded_file($post_image_temp, "../images/$post_image");
+
+    $query = <<<SQL
+        UPDATE posts 
+        SET post_category_id = :post_category, 
+            post_title = :post_title, 
+            post_date = :post_date, 
+            post_author = :post_author, 
+            post_user = :post_user, 
+            post_text = :post_content, 
+            post_tags = :post_tags, 
+            post_comments_count = :post_comments_count, 
+            post_status = :post_status
+        WHERE post_id = $id
+SQL;
+    $data = [':post_category' => $post_category,
+        ':post_title' => $post_title,
+        ':post_date' => $post_date,
+        ':post_author' => $post_author,
+        ':post_user' => $post_user,
+        ':post_content' => $post_content,
+        ':post_tags' => $post_tags,
+        ':post_comments_count' => $post_comments_count,
+        ':post_status' => $post_status
+    ];
+    $addPost = $database_connection->prepare($query);
+    $addPost->execute($data);
+
+    $imageQuery = "UPDATE posts SET post_image = '$post_image' WHERE post_id = '$id'";
+
+    if($post_image) {
+        unlink("../images/$old_image_name");
+        move_uploaded_file($post_image_temp, "../images/$post_image");
+        $updateImage = $database_connection->prepare($imageQuery);
+        $updateImage->execute();
+    }
+
+
+
 }
 
 function deletePost($id) {

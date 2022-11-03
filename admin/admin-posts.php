@@ -54,7 +54,7 @@ header("Location: admin-posts.php");
                                 <td><?php echo $post['post_id'] ?></td>
                                 <td><?php echo $post['post_author'] ?></td>
                                 <td><?php echo $post['post_title'] ?></td>
-                                <td><?php echo 'category' ?></td>
+                                <td><?php echo $post['post_category_id'] ?></td>
                                 <td><?php echo $post['post_status'] ?></td>
                                 <td>
                                     <img class="img-responsive"
@@ -64,6 +64,7 @@ header("Location: admin-posts.php");
                                 <td><?php echo $post['post_comments_count'] ?></td>
                                 <td><?php echo $post['post_date'] ?></td>
                                 <td><a href="admin-posts.php?delete_id=<?php echo $post['post_id']?>">delete</a></td>
+                                <td><a href="edit_post.php?edit_id=<?php echo $post['post_id']?>">edit</a></td>
                             </tr>
                         <?php }
 
