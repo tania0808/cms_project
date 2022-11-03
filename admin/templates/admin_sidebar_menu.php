@@ -10,7 +10,7 @@
                     <a href="admin-posts.php">View all posts</a>
                 </li>
                 <li>
-                    <a href="#">Add post</a>
+                    <a href="add_post.php">Add post</a>
                 </li>
             </ul>
         </li>
