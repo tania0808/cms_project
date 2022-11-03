@@ -18,7 +18,6 @@
                 <td><?php echo $category['category_title']; ?></td>
                 <td><a href="categories.php?id=<?php echo $category['category_id']?>">delete</a></td>
                 <td><a href="categories.php?category=<?php echo $category['category_title']?>&edit_id=<?php echo $category['category_id']?>">edit</a></td>
-
             </tr>
         <?php } ?>
         </tbody>

@@ -1,3 +1,11 @@
+<?php
+include_once '../includes/functions.php';
+
+if(isset($_GET['delete_id'])){
+deletePost($_GET['delete_id']);
+header("Location: admin-posts.php");
+}
+?>
 <?php include_once 'templates/head.php'; ?>
 <body>
 
@@ -17,6 +25,13 @@
                         Admin Posts
                         <small>Author</small>
                     </h1>
+                    <?php
+                        include_once '../includes/functions.php';
+                        $posts = getPosts();
+                        if (count($posts) === 0) {
+                            echo '<h3 style="margin-bottom: 4rem">There are no posts !</h3>';
+                        } else { ?>
+
                     <table class="table table-hover table-bordered">
                         <thead>
                         <tr>
@@ -32,13 +47,8 @@
                         </tr>
                         </thead>
                         <tbody>
-                        <?php
-                        include_once '../includes/functions.php';
-                        $posts = getPosts();
-                        if (count($posts) === 0) {
-                            echo 'There are no posts !';
-                        }
 
+                    <?php
                         foreach ($posts as $post) { ?>
                             <tr>
                                 <td><?php echo $post['post_id'] ?></td>
@@ -48,13 +58,16 @@
                                 <td><?php echo $post['post_status'] ?></td>
                                 <td>
                                     <img class="img-responsive"
-                                         src="<?php echo '../images/' . $post['post_image'] . '.jpg' ?>" alt="">
+                                         src="<?php echo '../images/' . $post['post_image']?>" alt="">
                                 </td>
                                 <td><?php echo $post['post_tags'] ?></td>
                                 <td><?php echo $post['post_comments_count'] ?></td>
                                 <td><?php echo $post['post_date'] ?></td>
+                                <td><a href="admin-posts.php?delete_id=<?php echo $post['post_id']?>">delete</a></td>
                             </tr>
                         <?php }
+
+                        }
                         ?>
                         </tbody>
                     </table>

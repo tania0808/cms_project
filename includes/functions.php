@@ -23,8 +23,8 @@ function addCategory($title) {
 function deleteCategory($id) {
     global $database_connection;
     $query = "DELETE FROM category WHERE category_id= '$id'";
-    $addCategory = $database_connection->prepare($query);
-    $addCategory->execute();
+    $deleteCategory = $database_connection->prepare($query);
+    $deleteCategory->execute();
 }
 
 function editCategory($id, $newTitle) {
@@ -77,6 +77,13 @@ function addPost() {
     ];
     $addPost = $database_connection->prepare($query);
     $addPost->execute($data);
+}
+
+function deletePost($id) {
+    global $database_connection;
+    $query = "DELETE FROM posts WHERE post_id= '$id'";
+    $deletePost = $database_connection->prepare($query);
+    $deletePost->execute();
 }
 
 function searchPosts() {
