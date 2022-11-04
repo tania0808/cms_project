@@ -11,6 +11,15 @@ function getCategories() {
 
     return $getCategories->fetchAll();
 }
+function getOneCategory($id) {
+    global $database_connection;
+
+    $query = "SELECT * FROM category WHERE category_id= '$id'";
+    $getCategory = $database_connection->prepare($query);
+    $getCategory->execute();
+
+    return $getCategory->fetch();
+}
 
 function addCategory($title) {
     global $database_connection;

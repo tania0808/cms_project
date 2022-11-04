@@ -54,7 +54,9 @@ header("Location: admin-posts.php");
                                 <td><?php echo $post['post_id'] ?></td>
                                 <td><?php echo $post['post_author'] ?></td>
                                 <td><?php echo $post['post_title'] ?></td>
-                                <td><?php echo $post['post_category_id'] ?></td>
+                                <td><?php
+                                    $category = getOneCategory($post['post_category_id']);
+                                    echo $category['category_title'] ?></td>
                                 <td><?php echo $post['post_status'] ?></td>
                                 <td>
                                     <img class="img-responsive"
@@ -63,8 +65,8 @@ header("Location: admin-posts.php");
                                 <td><?php echo $post['post_tags'] ?></td>
                                 <td><?php echo $post['post_comments_count'] ?></td>
                                 <td><?php echo $post['post_date'] ?></td>
-                                <td><a href="admin-posts.php?delete_id=<?php echo $post['post_id']?>">delete</a></td>
                                 <td><a href="edit_post.php?edit_id=<?php echo $post['post_id']?>">edit</a></td>
+                                <td><a href="admin-posts.php?delete_id=<?php echo $post['post_id']?>">delete</a></td>
                             </tr>
                         <?php }
 
