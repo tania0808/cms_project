@@ -1,17 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-    <head>
-        <meta charset="utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-        <meta name="description" content="" />
-        <meta name="author" content="" />
-        <title>Blog Home - Start Bootstrap Template</title>
-        <!-- Favicon-->
-        <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
-        <!-- Core theme CSS (includes Bootstrap)-->
-        <link href="css/styles.css" rel="stylesheet" />
-    </head>
-    <body>
+<?php include_once 'templates/head.php' ?>
         <!-- Responsive navbar-->
         <?php include_once 'templates/navbar.php' ?>
         <!-- Page content-->
@@ -40,7 +27,7 @@
                                 foreach ($posts as $post) { ?>
                                     <a href="#!"><img style="height: 300px; object-fit: cover" class="card-img-top" src="images/<?php echo $post['post_image'] ?>" alt="..." /></a>
 
-                                    <div class="card-body">
+                                    <div class="card-body mt-5">
                                         <h2 class="card-title h4"><a href="post.php?id=<?php echo $post['post_id'];?>"><?php echo $post['post_title'] ?></a></h2>
                                         <div class="small text-muted"><?php echo $post['post_date'] ?></div>
                                         <div class="small">by <span class="text-primary"><?php echo $post['post_author'] ?></span></div>
@@ -76,9 +63,3 @@
         </div>
         <!-- Footer-->
         <?php include_once 'templates/footer.php' ?>
-        <!-- Bootstrap core JS-->
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
-        <!-- Core theme JS-->
-        <script src="js/scripts.js"></script>
-    </body>
-</html>

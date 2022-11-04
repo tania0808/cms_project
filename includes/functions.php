@@ -2,7 +2,8 @@
 
 include_once 'db_connection.php';
 
-function getCategories() {
+function getCategories(): bool|array
+{
     global $database_connection;
 
     $query = 'SELECT * FROM category';
@@ -21,7 +22,8 @@ function getOneCategory($id) {
     return $getCategory->fetch();
 }
 
-function addCategory($title) {
+function addCategory($title): bool|array
+{
     global $database_connection;
     $query = "INSERT INTO category (category_title) VALUES ('$title')";
     $addCategory = $database_connection->prepare($query);
@@ -29,21 +31,24 @@ function addCategory($title) {
 
     return $addCategory->fetchAll();
 }
-function deleteCategory($id) {
+function deleteCategory($id): void
+{
     global $database_connection;
     $query = "DELETE FROM category WHERE category_id= '$id'";
     $deleteCategory = $database_connection->prepare($query);
     $deleteCategory->execute();
 }
 
-function editCategory($id, $newTitle) {
+function editCategory($id, $newTitle): void
+{
     global $database_connection;
     $query = "UPDATE category SET category_title = '$newTitle' WHERE category_id= '$id'";
     $editCategory = $database_connection->prepare($query);
     $editCategory->execute();
 }
 
-function getPosts() {
+function getPosts(): bool|array
+{
     global $database_connection;
 
     $query = 'SELECT * FROM posts';
@@ -63,7 +68,8 @@ function getOnePost($id) {
     return $getPost->fetch();
 }
 
-function addPost() {
+function addPost(): void
+{
     global $database_connection;
     $post_title = $_POST['title'];
     $post_category = $_POST['category'];
@@ -98,7 +104,8 @@ function addPost() {
     $addPost->execute($data);
 }
 
-function updatePost($id) {
+function updatePost($id): void
+{
     global $database_connection;
     $post_title = $_POST['title'];
     $post_category = $_POST['category'];
@@ -109,7 +116,7 @@ function updatePost($id) {
     $post_image_temp = $_FILES['image']['tmp_name'];
     $post_tags = $_POST['tags'];
     $post_content = $_POST['content'];
-    $post_date = date('d-m-y');
+    $post_date = date("F j, Y, g:i a");
     $post_comments_count = 4;
     $old_image_name = $_POST['old_image_name'];
 
@@ -154,32 +161,65 @@ SQL;
 
 }
 
-function deletePost($id) {
+function deletePost($id): void
+{
     global $database_connection;
     $query = "DELETE FROM posts WHERE post_id= '$id'";
     $deletePost = $database_connection->prepare($query);
     $deletePost->execute();
 }
 
-function searchPosts() {
+function searchPosts(): bool|array
+{
     global $database_connection;
     $search =  $_POST['search'];
     $query = "SELECT * FROM posts WHERE post_tags LIKE '%$search%' ";
     $searchStatement = $database_connection->prepare($query);
     $searchStatement->execute();
-    $results = $searchStatement->fetchAll();
 
-    return $results;
+    return  $searchStatement->fetchAll();
 
 }
-function searchPostsByCategory() {
+function searchPostsByCategory(): bool|array
+{
     global $database_connection;
     $search =  $_GET['category'];
     $query = "SELECT * FROM posts WHERE post_category_id = '$search'";
     $searchStatement = $database_connection->prepare($query);
     $searchStatement->execute();
-    $results = $searchStatement->fetchAll();
 
-    return $results;
+    return $searchStatement->fetchAll();
 
+}
+
+function getComments(): bool|array
+{
+    global $database_connection;
+
+    $query = 'SELECT * FROM comments';
+    $getComments = $database_connection->prepare($query);
+    $getComments->execute();
+
+    return $getComments->fetchAll();
+}
+
+function addComment(): bool|array
+{
+    global $database_connection;
+    $post_id = $_GET['id'];
+    $author = $_POST['comment_author'];
+    $email = $_POST['comment_email'];
+    $content = $_POST['comment_content'];
+    $status = 'not approved';
+    $date = date("F j, Y, g:i a");
+
+    $query = <<<SQL
+        INSERT INTO comments (comment_post_id, comment_date, comment_author, comment_email, comment_content , comment_status) 
+        VALUES ('$post_id', '$date', '$author', '$email', '$content', '$status')
+    SQL;
+
+    $addComment = $database_connection->prepare($query);
+    $addComment->execute();
+
+    return $addComment->fetchAll();
 }
