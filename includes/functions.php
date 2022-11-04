@@ -231,3 +231,12 @@ function deleteComment($id): void
     $deleteComment = $database_connection->prepare($query);
     $deleteComment->execute();
 }
+
+function changeCommentStatus($id, $action) {
+    global $database_connection;
+    $query = null;
+    $status = $action === 'Approve' ? 'approved' : 'disapproved';
+    $query = "UPDATE comments SET comment_status = '$status'  WHERE comment_id = '$id'";
+    $changeStatus = $database_connection->prepare($query);
+    $changeStatus->execute();
+}

@@ -4,6 +4,15 @@ include_once '../includes/functions.php';
 if(isset($_GET['delete_id'])) {
     $comment_id = $_GET['delete_id'];
     deleteComment($comment_id);
+    header("Location: admin-comments.php");
+}
+
+if(isset($_GET['action'])) {
+    $id = $_GET['comment_id'];
+    $action = $_GET['action'];
+
+    changeCommentStatus($id, $action);
+    header("Location: admin-comments.php");
 }
 ?>
 <?php include_once 'templates/head.php'; ?>
@@ -63,8 +72,8 @@ if(isset($_GET['delete_id'])) {
                                     </a>
                                 </td>
                                 <td><?php echo $comment['comment_date'] ?></td>
-                                <td><a href="edit_post.php?edit_id=<?php ?>">Approve</a></td>
-                                <td><a href="edit_post.php?edit_id=<?php ?>">Disapprove</a></td>
+                                <td><a href="admin-comments.php?comment_id=<?php echo $comment['comment_id']?>&action=<?php echo 'Approve' ?>">Approve</a></td>
+                                <td><a href="admin-comments.php?comment_id=<?php echo $comment['comment_id']?>&action=<?php echo 'Disapprove' ?>">Disapprove</a></td>
                                 <td><a href="admin-comments.php?delete_id=<?php echo $comment['comment_id'] ?>">delete</a></td>
                             </tr>
                         <?php }
