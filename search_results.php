@@ -40,7 +40,7 @@
                                 <?php foreach ($posts as $post) { ?>
                                     <div class="card mb-4">
                                         <p>Created by <a href="#"> <?php echo $post['post_author'] ?></a></p>
-                                        <a href="#!"><img style="height: 300px; object-fit: cover" class="card-img-top" src="images/<?php echo $post['post_image'] ?>.jpg" alt="..." /></a>
+                                        <a href="#!"><img style="height: 300px; object-fit: cover" class="card-img-top" src="images/<?php echo $post['post_image'] ?>" alt="..." /></a>
                                         <div class="card-body">
                                             <div class="small text-muted"><?php echo $post['post_date'] ?></div>
                                             <h2 class="card-title h4"><?php echo $post['post_title'] ?></h2>

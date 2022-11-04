@@ -34,7 +34,7 @@
                         </div>
                         <div class="form-group">
                             <label for="category">Post Category</label>
-                            <select name="category" id="" class="form-control">
+                            <select style="width: 300px" name="category" id="" class="form-control">
                                 <?php include_once '../includes/functions.php';
                                 $categories = getCategories();
                                 foreach ($categories as $category) {

@@ -74,7 +74,7 @@ function addPost() {
     $post_image_temp = $_FILES['image']['tmp_name'];
     $post_tags = $_POST['tags'];
     $post_content = $_POST['content'];
-    $post_date = date('d-m-y');
+    $post_date = date("F j, Y, g:i a");
     $post_comments_count = 4;
 
     move_uploaded_file($post_image_temp, "../images/$post_image");

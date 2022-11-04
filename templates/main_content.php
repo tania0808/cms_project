@@ -18,26 +18,47 @@ include_once 'includes/functions.php';
                 <div class="card mb-4">
                     <a href="#!"><img style="height: 300px; object-fit: cover" class="card-img-top" src="../images/<?php echo $featuredPost['post_image'];?>" alt="..." /></a>
                     <div class="card-body">
+                        <h2 class="card-title h4"><a href="post.php?id=<?php echo $featuredPost['post_id'];?>"><?php echo $featuredPost['post_title'] ?></a></h2>
                         <div class="small text-muted"><?php echo $featuredPost['post_date'] ?></div>
-                        <h2 class="card-title h4"><?php echo $featuredPost['post_title'] ?></h2>
-                        <p class="card-text"><?php echo $featuredPost['post_text'] ?></p>
-                        <a class="btn btn-primary" href="#!">Read more →</a>
+                        <div class="small">by <span class="text-primary"><?php echo $featuredPost['post_author'] ?></span></div>
+                        <p class="card-text"><?php
+                            $text = $featuredPost['post_text'];
+                            $n_char = 50;
+                            if(strlen($text) > $n_char) {
+                                $text = substr($text, 0, $n_char);
+                                echo $text . '...';
+                            } else {
+                                echo $text;
+                            }
+                            ?>
+                        </p>
+                        <a class="btn btn-primary" href="post.php?id=<?php echo $featuredPost['post_id'];?>">Read more →</a>
                     </div>
                 </div>
                 <!-- Nested row for non-featured blog posts-->
                 <div class="row">
                     <?php foreach ($posts as $postChunk) { ?>
-                    <div class="col-lg-6">
+                    <div class="col-lg-12">
                         <!-- Blog post-->
                         <?php foreach ($postChunk as $post) { ?>
                             <div class="card mb-4">
-                                <p>Created by <a href="#"> <?php echo $post['post_author'] ?></a></p>
                                 <a href="#!"><img style="height: 300px; object-fit: cover" class="card-img-top" src="images/<?php echo $post['post_image'] ?>" alt="..." /></a>
                                 <div class="card-body">
+                                    <h2 class="card-title h4"><a href="post.php?id=<?php echo $post['post_id'];?>"><?php echo $post['post_title'] ?></a></h2>
                                     <div class="small text-muted"><?php echo $post['post_date'] ?></div>
-                                    <h2 class="card-title h4"><?php echo $post['post_title'] ?></h2>
-                                    <p class="card-text"><?php echo $post['post_text'] ?></p>
-                                    <a class="btn btn-primary" href="#!">Read more →</a>
+                                    <div class="small">by <span class="text-primary"><?php echo $featuredPost['post_author'] ?></span></div>
+                                    <p class="card-text"><?php
+                                        $text = $post['post_text'];
+                                        $n_char = 50;
+                                        if(strlen($text) > $n_char) {
+                                            $text = substr($text, 0, $n_char);
+                                            echo $text . '...';
+                                        } else {
+                                            echo $text;
+                                        }
+                                        ?>
+                                    </p>
+                                    <a class="btn btn-primary" href="post.php?id=<?php echo $post['post_id'];?>">Read more →</a>
                                 </div>
                             </div>
                         <?php } ?>
