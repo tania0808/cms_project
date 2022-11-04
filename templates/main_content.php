@@ -46,7 +46,7 @@ include_once 'includes/functions.php';
                                 <div class="card-body">
                                     <h2 class="card-title h4"><a href="post.php?id=<?php echo $post['post_id'];?>"><?php echo $post['post_title'] ?></a></h2>
                                     <div class="small text-muted"><?php echo $post['post_date'] ?></div>
-                                    <div class="small">by <span class="text-primary"><?php echo $featuredPost['post_author'] ?></span></div>
+                                    <div class="small">by <span class="text-primary"><?php echo $post['post_author'] ?></span></div>
                                     <p class="card-text"><?php
                                         $text = $post['post_text'];
                                         $n_char = 50;

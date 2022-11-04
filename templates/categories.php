@@ -12,7 +12,7 @@
                 <div class="col-sm-6">
                     <?php foreach ($categoriesChunk as $category) { ?>
                         <ul class="list-unstyled mb-0">
-                            <li><a href="#!"><?php echo $category['category_title']; ?></a></li>
+                            <li><a href="posts_by_category.php?category=<?php echo $category['category_id']; ?>"><?php echo $category['category_title']; ?></a></li>
                         </ul>
                     <?php } ?>
                 </div>

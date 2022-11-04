@@ -172,3 +172,14 @@ function searchPosts() {
     return $results;
 
 }
+function searchPostsByCategory() {
+    global $database_connection;
+    $search =  $_GET['category'];
+    $query = "SELECT * FROM posts WHERE post_category_id = '$search'";
+    $searchStatement = $database_connection->prepare($query);
+    $searchStatement->execute();
+    $results = $searchStatement->fetchAll();
+
+    return $results;
+
+}
