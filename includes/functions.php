@@ -223,3 +223,11 @@ function addComment(): bool|array
 
     return $addComment->fetchAll();
 }
+
+function deleteComment($id): void
+{
+    global $database_connection;
+    $query = "DELETE FROM comments WHERE comment_id= '$id'";
+    $deleteComment = $database_connection->prepare($query);
+    $deleteComment->execute();
+}

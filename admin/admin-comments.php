@@ -1,6 +1,10 @@
 <?php
 include_once '../includes/functions.php';
 
+if(isset($_GET['delete_id'])) {
+    $comment_id = $_GET['delete_id'];
+    deleteComment($comment_id);
+}
 ?>
 <?php include_once 'templates/head.php'; ?>
 <body>
@@ -31,13 +35,15 @@ include_once '../includes/functions.php';
                     <table class="table table-hover table-bordered">
                         <thead>
                         <tr>
-                            <th>Comment Id</th>
-                            <th>Comment Post Id</th>
-                            <th>Date</th>
+                            <th>Id</th>
                             <th>Author</th>
-                            <th>User Email</th>
-                            <th>Content</th>
+                            <th>Comment</th>
+                            <th>Email</th>
                             <th>Status</th>
+                            <th>Post</th>
+                            <th>Date</th>
+                            <th>Approve</th>
+                            <th>Disapprove</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -46,15 +52,20 @@ include_once '../includes/functions.php';
                         foreach ($comments as $comment) { ?>
                             <tr>
                                 <td><?php echo $comment['comment_id'] ?></td>
-                                <td><?php echo $comment['comment_post_id'] ?></td>
-                                <td><?php echo $comment['comment_date'] ?></td>
                                 <td><?php echo $comment['comment_author'] ?></td>
-                                <td><?php echo $comment['comment_email'] ?></td>
                                 <td><?php echo $comment['comment_content'] ?></td>
+                                <td><?php echo $comment['comment_email'] ?></td>
                                 <td><?php echo $comment['comment_status'] ?></td>
+                                <td><a href="../post.php?id=<?php echo $comment['comment_post_id'] ?>">
+                                        <?php
+                                        $post = getOnePost($comment['comment_post_id']);
+                                        echo $post['post_title'] ?>
+                                    </a>
+                                </td>
+                                <td><?php echo $comment['comment_date'] ?></td>
                                 <td><a href="edit_post.php?edit_id=<?php ?>">Approve</a></td>
-                                <td><a href="edit_post.php?edit_id=<?php ?>">Unapprove</a></td>
-                                <td><a href="admin-posts.php?delete_id=<?php ?>">delete</a></td>
+                                <td><a href="edit_post.php?edit_id=<?php ?>">Disapprove</a></td>
+                                <td><a href="admin-comments.php?delete_id=<?php echo $comment['comment_id'] ?>">delete</a></td>
                             </tr>
                         <?php }
 
