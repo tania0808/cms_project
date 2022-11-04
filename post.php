@@ -28,7 +28,7 @@
             <!-- Blog Comments -->
             <!-- Posted Comments -->
             <!-- Comments Form -->
-            <div class="well">
+            <div class="well mt-5 pt-5">
                 <h4>Leave a Comment:</h4>
                 <form action="#" method="post" role="form">
                     <div class="form-group">
@@ -48,7 +48,45 @@
                     <button type="submit" name="create_comment" class="btn btn-primary">Submit</button>
                 </form>
             </div>
-            <hr>
+            <div class="row d-flex justify-content-start mt-5">
+                <div class="col-md-10 col-lg-10">
+                    <?php
+                    include_once 'includes/functions.php';
+                    $comments = getCommentsByPost();
+                    ?>
+
+                    <?php foreach ($comments as $comment) { ?>
+                    <div class="card shadow-0 border" style="background-color: #f0f2f5;">
+                        <div class="card-body p-4">
+                            <div class="card mb-4">
+                                <div class="card-body">
+                                    <p><?php echo $comment['comment_content'] ?></p>
+
+                                    <div class="d-flex justify-content-between">
+                                        <div class="d-flex flex-row align-items-center">
+                                            <img
+                                                    src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/img%20(4).webp"
+                                                    alt="avatar"
+                                                    width="25"
+                                                    height="25"
+                                            />
+                                            <p class="small mb-0 ms-2"><?php echo $comment['comment_author'] ?></p>
+                                        </div>
+                                        <div class="d-flex flex-row align-items-center">
+                                            <p class="small text-muted mb-0"><?php echo $comment['comment_date'] ?></p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <hr>
+                    <?php
+                    };
+                    ?>
+
+                </div>
+            </div>
         </div>
         <!-- Blog Sidebar Widgets Column -->
         <div class="col-lg-4">
@@ -61,8 +99,6 @@
         </div>
     </div>
 </div>
-    <!-- /.row -->
-    <hr>
 <?php include_once 'templates/footer.php' ?>
 
 

@@ -203,6 +203,17 @@ function getComments(): bool|array
     return $getComments->fetchAll();
 }
 
+function getCommentsByPost(): array
+{
+    global $database_connection;
+    $id = $_GET['id'];
+    $query = "SELECT * FROM comments WHERE comment_post_id = '$id' AND comment_status = 'approved' ORDER BY comment_id DESC ";
+    $getComments = $database_connection->prepare($query);
+    $getComments->execute();
+
+    return $getComments->fetchAll();
+}
+
 function addComment(): bool|array
 {
     global $database_connection;
@@ -210,7 +221,7 @@ function addComment(): bool|array
     $author = $_POST['comment_author'];
     $email = $_POST['comment_email'];
     $content = $_POST['comment_content'];
-    $status = 'not approved';
+    $status = 'disapproved';
     $date = date("F j, Y, g:i a");
 
     $query = <<<SQL
