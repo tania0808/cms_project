@@ -81,7 +81,7 @@ function addPost(): void
     $post_tags = $_POST['tags'];
     $post_content = $_POST['content'];
     $post_date = date("F j, Y, g:i a");
-    $post_comments_count = 4;
+    $post_comments_count = 0;
 
     move_uploaded_file($post_image_temp, "../images/$post_image");
 
@@ -232,6 +232,14 @@ function addComment(): bool|array
     $addComment = $database_connection->prepare($query);
     $addComment->execute();
 
+    $updateCommentQuery = <<<SQL
+    UPDATE posts
+    SET post_comments_count = post_comments_count + 1
+    WHERE post_id = '$post_id'
+    SQL;
+    $updateCommentCount = $database_connection->prepare($updateCommentQuery);
+    $updateCommentCount->execute();
+
     return $addComment->fetchAll();
 }
 
@@ -245,7 +253,6 @@ function deleteComment($id): void
 
 function changeCommentStatus($id, $action) {
     global $database_connection;
-    $query = null;
     $status = $action === 'Approve' ? 'approved' : 'disapproved';
     $query = "UPDATE comments SET comment_status = '$status'  WHERE comment_id = '$id'";
     $changeStatus = $database_connection->prepare($query);
