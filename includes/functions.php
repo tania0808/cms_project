@@ -58,6 +58,18 @@ function getPosts(): bool|array
     return $getPosts->fetchAll();
 }
 
+
+function getPublishedPosts(): bool|array
+{
+    global $database_connection;
+
+    $query = 'SELECT * FROM posts WHERE post_status = "Published"';
+    $getPosts = $database_connection->prepare($query);
+    $getPosts->execute();
+
+    return $getPosts->fetchAll();
+}
+
 function getOnePost($id) {
     global $database_connection;
 

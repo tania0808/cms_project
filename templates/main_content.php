@@ -3,7 +3,7 @@ include_once 'includes/functions.php';
 ?>
     <!-- Featured blog post-->
 <?php
-$posts = getPosts();
+$posts = getPublishedPosts();
 $featuredPost = array_shift($posts);
 $posts = array_chunk($posts, 2);
 
