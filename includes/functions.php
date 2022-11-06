@@ -270,3 +270,42 @@ function changeCommentStatus($id, $action) {
     $changeStatus = $database_connection->prepare($query);
     $changeStatus->execute();
 }
+
+function getAllUsers(): bool|array
+{
+    global $database_connection;
+
+    $query = 'SELECT * FROM users';
+    $getUsers = $database_connection->prepare($query);
+    $getUsers->execute();
+
+    return $getUsers->fetchAll();
+}
+
+function addUser(): bool|array
+{
+    global $database_connection;
+    $first_name = $_POST['first_name'];
+    $last_name = $_POST['last_name'];
+    $role = $_POST['role'];
+    $username = $_POST['username'];
+    $email = $_POST['email'];
+    $password = $_POST['password'];
+    $image = 'earth.jpeg';
+
+    $query = <<<SQL
+        INSERT INTO users (user_first_name, user_last_name, user_role, user_name, user_email , user_password, user_image) 
+        VALUES ('$first_name', '$last_name', '$role', '$username', '$email', '$password', '$image')
+    SQL;
+
+    $addUser = $database_connection->prepare($query);
+    return $addUser->execute();
+}
+
+function deleteUser($id): void
+{
+    global $database_connection;
+    $query = "DELETE FROM users WHERE user_id= '$id'";
+    $deleteUser = $database_connection->prepare($query);
+    $deleteUser->execute();
+}
