@@ -309,3 +309,11 @@ function deleteUser($id): void
     $deleteUser = $database_connection->prepare($query);
     $deleteUser->execute();
 }
+
+function changeUserRole($id, $action) {
+    global $database_connection;
+    $role = $action === 'Admin' ? 'Admin' : 'Subscriber';
+    $query = "UPDATE users SET user_role = '$role'  WHERE user_id = '$id'";
+    $changeRole = $database_connection->prepare($query);
+    $changeRole->execute();
+}

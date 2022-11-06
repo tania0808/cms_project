@@ -5,6 +5,11 @@ if(isset($_GET['delete_id'])){
 deleteUser($_GET['delete_id']);
 header("Location: admin-users.php");
 }
+
+if(isset($_GET['action'])){
+    changeUserRole($_GET['user_id'], $_GET['action']);
+    header("Location: admin-users.php");
+}
 ?>
 <?php include_once 'templates/head.php'; ?>
 <body>
@@ -62,9 +67,9 @@ header("Location: admin-users.php");
                                          src="<?php echo '../images/' . $user['user_image']?>" alt="">
                                 </td>
                                 <td><?php echo $user['user_role'] ?></td>
-                                <td><a href="admin-comments.php?user_id=<?php echo $user['user_id']?>&action=<?php echo 'Approve' ?>">Approve</a></td>
-                                <td><a href="admin-comments.php?user_id=<?php echo $user['user_id']?>&action=<?php echo 'Disapprove' ?>">Disapprove</a></td>
-                                <td><a href="admin-comments.php?delete_id=<?php echo $user['user_id'] ?>">Delete</a></td>
+                                <td><a href="admin-users.php?user_id=<?php echo $user['user_id']?>&action=<?php echo 'Admin' ?>">Change To Admin</a></td>
+                                <td><a href="admin-users.php?user_id=<?php echo $user['user_id']?>&action=<?php echo 'Subscriber' ?>">Change to Subscriber</a></td>
+                                <td><a href="admin-users.php?delete_id=<?php echo $user['user_id'] ?>">Delete</a></td>
                             </tr>
                         <?php }
 
