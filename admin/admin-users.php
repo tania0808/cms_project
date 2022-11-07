@@ -67,8 +67,9 @@ if(isset($_GET['action'])){
                                          src="<?php echo '../images/' . $user['user_image']?>" alt="">
                                 </td>
                                 <td><?php echo $user['user_role'] ?></td>
-                                <td><a href="admin-users.php?user_id=<?php echo $user['user_id']?>&action=<?php echo 'Admin' ?>">Change To Admin</a></td>
-                                <td><a href="admin-users.php?user_id=<?php echo $user['user_id']?>&action=<?php echo 'Subscriber' ?>">Change to Subscriber</a></td>
+                                <td><a href="admin-users.php?user_id=<?php echo $user['user_id']?>&action=<?php echo 'Admin' ?>">Admin</a></td>
+                                <td><a href="admin-users.php?user_id=<?php echo $user['user_id']?>&action=<?php echo 'Subscriber' ?>">Subscriber</a></td>
+                                <td><a href="edit_user.php?edit_id=<?php echo $user['user_id'] ?>">Edit</a></td>
                                 <td><a href="admin-users.php?delete_id=<?php echo $user['user_id'] ?>">Delete</a></td>
                             </tr>
                         <?php }

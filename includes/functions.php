@@ -282,6 +282,16 @@ function getAllUsers(): bool|array
     return $getUsers->fetchAll();
 }
 
+function getOneUser($id) {
+    global $database_connection;
+
+    $query = "SELECT * FROM users WHERE user_id = $id";
+    $getUser = $database_connection->prepare($query);
+    $getUser->execute();
+
+    return $getUser->fetch();
+}
+
 function addUser(): bool|array
 {
     global $database_connection;
@@ -316,4 +326,39 @@ function changeUserRole($id, $action) {
     $query = "UPDATE users SET user_role = '$role'  WHERE user_id = '$id'";
     $changeRole = $database_connection->prepare($query);
     $changeRole->execute();
+}
+
+function updateUser($id): void
+{
+    global $database_connection;
+    $first_name = $_POST['first_name'];
+    $last_name = $_POST['last_name'];
+    $role = $_POST['role'];
+    $username = $_POST['username'];
+    $email = $_POST['email'];
+    $password = $_POST['password'];
+    $image = 'earth.jpeg';
+
+    $query = <<<SQL
+        UPDATE users
+        SET user_first_name = :first_name, 
+            user_last_name = :last_name, 
+            user_role = :role, 
+            user_name = :username, 
+            user_email = :email, 
+            user_password = :password, 
+            user_image = :image
+        WHERE user_id = $id
+SQL;
+    $data = [
+        ':first_name' => $first_name,
+        ':last_name' => $last_name,
+        ':role' => $role,
+        ':username' => $username,
+        ':email' => $email,
+        ':password' => $password,
+        ':image' => $image
+    ];
+    $editUser = $database_connection->prepare($query);
+    $editUser->execute($data);
 }
