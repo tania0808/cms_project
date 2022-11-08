@@ -47,7 +47,7 @@ $posts = array_chunk($posts, 2);
                             <?php foreach ($postChunk as $post) { ?>
                                 <div class="card mb-4">
                                     <a href="#!"><img style="height: 300px; object-fit: cover" class="card-img-top"
-                                                      src="images/<?php echo $post['post_image'] ?>" alt="..."/></a>
+                                                      src="./images/<?php echo $post['post_image'] ?>" alt="..."/></a>
                                     <div class="card-body">
                                         <h2 class="card-title h4"><a
                                                     href="post.php?id=<?php echo $post['post_id']; ?>"><?php echo $post['post_title'] ?></a>
@@ -81,6 +81,8 @@ $posts = array_chunk($posts, 2);
             <div class="col-lg-4">
                 <!-- Search widget-->
                 <?php include_once 'templates/search.php' ?>
+                <!-- Login Form -->
+                <?php include_once './login.php' ?>
                 <!-- Categories widget-->
                 <?php include_once 'templates/categories.php' ?>
                 <!-- Side widget-->

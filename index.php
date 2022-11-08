@@ -1,3 +1,6 @@
+<?php session_start();
+ob_start();
+?>
 <!--Head of the document-->
 <?php include_once 'templates/head.php' ?>
 <!-- Responsive navbar-->

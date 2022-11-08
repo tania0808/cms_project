@@ -2,6 +2,7 @@
 
 include_once 'db_connection.php';
 
+// CATEGORIES
 function getCategories(): bool|array
 {
     global $database_connection;
@@ -12,7 +13,9 @@ function getCategories(): bool|array
 
     return $getCategories->fetchAll();
 }
-function getOneCategory($id) {
+
+function getOneCategory($id)
+{
     global $database_connection;
 
     $query = "SELECT * FROM category WHERE category_id= '$id'";
@@ -31,6 +34,7 @@ function addCategory($title): bool|array
 
     return $addCategory->fetchAll();
 }
+
 function deleteCategory($id): void
 {
     global $database_connection;
@@ -47,6 +51,8 @@ function editCategory($id, $newTitle): void
     $editCategory->execute();
 }
 
+
+// POSTS
 function getPosts(): bool|array
 {
     global $database_connection;
@@ -70,7 +76,8 @@ function getPublishedPosts(): bool|array
     return $getPosts->fetchAll();
 }
 
-function getOnePost($id) {
+function getOnePost($id)
+{
     global $database_connection;
 
     $query = "SELECT * FROM posts WHERE post_id = $id";
@@ -102,15 +109,15 @@ function addPost(): void
         VALUES (:post_category, :post_title, :post_date, :post_author, :post_user, :post_image, :post_content, :post_tags, :post_comments_count, :post_status)
     SQL;
     $data = [':post_category' => $post_category,
-    ':post_title' => $post_title,
-    ':post_date' => $post_date,
-    ':post_author' => $post_author,
-    ':post_user' => $post_user,
-    ':post_image' => $post_image,
-    ':post_content' => $post_content,
-    ':post_tags' => $post_tags,
-    ':post_comments_count' => $post_comments_count,
-    ':post_status' => $post_status
+        ':post_title' => $post_title,
+        ':post_date' => $post_date,
+        ':post_author' => $post_author,
+        ':post_user' => $post_user,
+        ':post_image' => $post_image,
+        ':post_content' => $post_content,
+        ':post_tags' => $post_tags,
+        ':post_comments_count' => $post_comments_count,
+        ':post_status' => $post_status
     ];
     $addPost = $database_connection->prepare($query);
     $addPost->execute($data);
@@ -162,13 +169,12 @@ SQL;
 
     $imageQuery = "UPDATE posts SET post_image = '$post_image' WHERE post_id = '$id'";
 
-    if($post_image) {
+    if ($post_image) {
         unlink("../images/$old_image_name");
         move_uploaded_file($post_image_temp, "../images/$post_image");
         $updateImage = $database_connection->prepare($imageQuery);
         $updateImage->execute();
     }
-
 
 
 }
@@ -184,18 +190,19 @@ function deletePost($id): void
 function searchPosts(): bool|array
 {
     global $database_connection;
-    $search =  $_POST['search'];
+    $search = $_POST['search'];
     $query = "SELECT * FROM posts WHERE post_tags LIKE '%$search%' ";
     $searchStatement = $database_connection->prepare($query);
     $searchStatement->execute();
 
-    return  $searchStatement->fetchAll();
+    return $searchStatement->fetchAll();
 
 }
+
 function searchPostsByCategory(): bool|array
 {
     global $database_connection;
-    $search =  $_GET['category'];
+    $search = $_GET['category'];
     $query = "SELECT * FROM posts WHERE post_category_id = '$search'";
     $searchStatement = $database_connection->prepare($query);
     $searchStatement->execute();
@@ -204,6 +211,8 @@ function searchPostsByCategory(): bool|array
 
 }
 
+
+// COMMENTS
 function getComments(): bool|array
 {
     global $database_connection;
@@ -263,7 +272,8 @@ function deleteComment($id): void
     $deleteComment->execute();
 }
 
-function changeCommentStatus($id, $action) {
+function changeCommentStatus($id, $action)
+{
     global $database_connection;
     $status = $action === 'Approve' ? 'approved' : 'disapproved';
     $query = "UPDATE comments SET comment_status = '$status'  WHERE comment_id = '$id'";
@@ -271,6 +281,8 @@ function changeCommentStatus($id, $action) {
     $changeStatus->execute();
 }
 
+
+// USERS
 function getAllUsers(): bool|array
 {
     global $database_connection;
@@ -282,7 +294,8 @@ function getAllUsers(): bool|array
     return $getUsers->fetchAll();
 }
 
-function getOneUser($id) {
+function getOneUser($id)
+{
     global $database_connection;
 
     $query = "SELECT * FROM users WHERE user_id = $id";
@@ -320,7 +333,8 @@ function deleteUser($id): void
     $deleteUser->execute();
 }
 
-function changeUserRole($id, $action) {
+function changeUserRole($id, $action)
+{
     global $database_connection;
     $role = $action === 'Admin' ? 'Admin' : 'Subscriber';
     $query = "UPDATE users SET user_role = '$role'  WHERE user_id = '$id'";
@@ -361,4 +375,20 @@ SQL;
     ];
     $editUser = $database_connection->prepare($query);
     $editUser->execute($data);
+}
+
+
+function findUserByUsername($username)
+{
+    global $database_connection;
+
+    $query = "SELECT * FROM users WHERE user_name = :username";
+    $getUser = $database_connection->prepare($query);
+    $getUser->bindParam(':username', $username, PDO::PARAM_STR);
+    $getUser->execute();
+    $user = $getUser->fetch();
+    if (!$user) {
+        return null;
+    }
+    return $user;
 }
