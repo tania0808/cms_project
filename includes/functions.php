@@ -64,6 +64,16 @@ function getPosts(): bool|array
     return $getPosts->fetchAll();
 }
 
+function getPostsByStatus($status): bool|array
+{
+    global $database_connection;
+
+    $query = "SELECT * FROM posts WHERE post_status = '$status'";
+    $getPosts = $database_connection->prepare($query);
+    $getPosts->execute();
+
+    return $getPosts->fetchAll();
+}
 
 function getPublishedPosts(): bool|array
 {
@@ -272,6 +282,17 @@ function deleteComment($id): void
     $deleteComment->execute();
 }
 
+function getCommentsByStatus($status): bool|array
+{
+    global $database_connection;
+
+    $query = "SELECT * FROM comments WHERE comment_status = '$status'";
+    $getComments = $database_connection->prepare($query);
+    $getComments->execute();
+
+    return $getComments->fetchAll();
+}
+
 function changeCommentStatus($id, $action)
 {
     global $database_connection;
@@ -391,4 +412,15 @@ function findUserByUsername($username)
         return null;
     }
     return $user;
+}
+
+function getUsersByRole($role): bool|array
+{
+    global $database_connection;
+
+    $query = "SELECT * FROM users WHERE user_role = '$role'";
+    $getUsers = $database_connection->prepare($query);
+    $getUsers->execute();
+
+    return $getUsers->fetchAll();
 }
