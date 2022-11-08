@@ -1,3 +1,6 @@
+<?php
+include_once '../includes/functions.php'; ?>
+
 <?php include_once 'templates/head.php'; ?>
 <body>
 
@@ -10,22 +13,23 @@
 
         <div class="container-fluid">
 
+            <?php
+            if (isset($_SESSION['user_id'])) {
+                $user_id = $_SESSION['user_id'];
+                $user = getOneUser($user_id);
+            }
+
+
+            if (isset($_POST['update_profile'])) {
+                updateUser($user_id);
+                header('Location: profile.php');
+            }
+
+            ?>
             <!-- Page Heading -->
             <div class="row">
                 <div class="col-lg-12">
-                    <?php include_once '../includes/functions.php';
-                    $userId = $_GET['edit_id'];
-                    $user = getOneUser($userId);
-
-                    if(isset($_POST['edit_user'])){
-                        updateUser($userId);
-                        header("Location: admin-users.php");
-                    }
-                    //echo $_FILES['image']['name'];
-                    ?>
-                    <h1 class="page-header">
-                        Edit a  User
-                    </h1>
+                    <h1 class="page-header"><?php echo $user['user_name']; ?></h1>
                     <form action="" method="post" enctype="multipart/form-data">
                         <div class="form-group">
                             <label for="first_name">First name</label>
@@ -42,9 +46,9 @@
                                 <option value='<?php echo $user['user_role'] ?>'><?php echo $user['user_role'] ?></option>
                                 <?php
                                 if ($user['user_role'] === 'Admin') { ?>
-                                <option value="Subscriber">Subscriber</option>
+                                    <option value="Subscriber">Subscriber</option>
                                 <?php } else { ?>
-                                <option value="Admin">Admin</option>
+                                    <option value="Admin">Admin</option>
                                 <?php } ?>
                             </select>
                         </div>
@@ -60,9 +64,8 @@
                             <label for="password">Password</label>
                             <input type="password" name="password" class="form-control" value='<?php echo $user['user_password'] ?>'>
                         </div>
-                        <button name="edit_user" style="margin-bottom: 4rem;" type="submit" class="btn btn-primary">Edit User</button>
+                        <button name="update_profile" style="margin-bottom: 4rem;" type="submit" class="btn btn-primary">Update Profile</button>
                     </form>
-
                 </div>
             </div>
             <!-- /.row -->

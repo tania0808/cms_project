@@ -1,13 +1,3 @@
-<?php
-ob_start();
-session_start(); ?>
-
-<?php
-if((!isset($_SESSION['user_role'])) || ($_SESSION['user_role'] === "Subscriber")) {
-    header('Location: ../index.php');
-}
-
-?>
 <?php include_once 'templates/head.php'; ?>
 <body>
 
