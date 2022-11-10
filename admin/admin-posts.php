@@ -130,7 +130,14 @@ if (isset($_GET['delete_id'])) {
 
 </div>
 <!-- /#wrapper -->
-
+<script>
+    document.getElementById('selectAllBoxes').onclick = function() {
+        let checkboxes = document.querySelectorAll('input[type="checkbox"]');
+        for (let checkbox of checkboxes) {
+            checkbox.checked = this.checked;
+        }
+    }
+</script>
 <!-- jQuery -->
 <script src="js/jquery.js"></script>
 
