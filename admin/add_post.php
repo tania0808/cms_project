@@ -58,8 +58,8 @@
                             <input type="text" name="tags" class="form-control">
                         </div>
                         <div class="form-group">
-                            <label for="post_content">Content</label>
-                            <textarea id="summernote" name="editordata"></textarea>
+                            <label for="post_content">Content</label><br>
+                            <textarea class="form-control" rows="5" cols="30"></textarea>
                         </div>
                         <button name="create_post" style="margin-bottom: 4rem;" type="submit" class="btn btn-primary">Add Post</button>
                     </form>

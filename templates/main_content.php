@@ -7,8 +7,9 @@ $posts = getPublishedPosts();
 $featuredPost = array_shift($posts);
 $posts = array_chunk($posts, 2);
 
-
-?>
+if(!$posts) { ?>
+        <h3>There are no posts ! </h3>
+    <?php } else { ?>
     <div class="container">
         <div class="row">
             <!-- Blog entries-->
@@ -87,6 +88,6 @@ $posts = array_chunk($posts, 2);
         </div>
     </div>
     <!-- Nested row for non-featured blog posts-->
-
+<?php } ?>
     <!-- Pagination-->
 <?php include_once 'templates/pagination.php' ?>
