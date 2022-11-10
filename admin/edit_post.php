@@ -17,9 +17,10 @@
                     $postId = $_GET['edit_id'];
                     $post = getOnePost($postId);
 
-                    if(isset($_POST['edit_post'])){
+                    if (isset($_POST['edit_post'])) {
                         updatePost($postId);
-                        header("Location: admin-posts.php");
+                        echo "<p>Post updated ! <a href='../post.php?id=$postId'>View Post</a></p>";
+                        //header("Location: admin-posts.php");
                     }
                     //echo $_FILES['image']['name'];
                     ?>
@@ -30,7 +31,8 @@
                         <input type="hidden" name="old_image_name" value='<?php echo $post['post_image'] ?>'>
                         <div class="form-group">
                             <label for="title">Title</label>
-                            <input type="text" name="title" class="form-control" value='<?php echo $post['post_title'] ?>'>
+                            <input type="text" name="title" class="form-control"
+                                   value='<?php echo $post['post_title'] ?>'>
                         </div>
                         <div class="form-group">
                             <label for="category">Post Category</label>
@@ -45,32 +47,45 @@
                         </div>
                         <div class="form-group">
                             <label for="author">Post Author</label>
-                            <input type="text" name="author" class="form-control" value='<?php echo $post['post_author'] ?>'>
+                            <input type="text" name="author" class="form-control"
+                                   value='<?php echo $post['post_author'] ?>'>
                         </div>
                         <div class="form-group">
                             <label for="status">Post Status</label><br>
                             <select style="width: 200px;" name="status" id="" class="form-control">
-                                <option value="Draft">Draft</option>
-                                <option value="Published">Published</option>
+                                <?php
+                                if ($post['post_status'] === 'Draft') {
+                                    echo '<option value="Draft">Draft</option>';
+                                    echo '<option value="Published">Published</option>';
+                                } else {
+                                    echo '<option value="Published">Published</option>';
+                                    echo '<option value="Draft">Draft</option>';
+                                }
+                                ?>
                             </select>
                             <!--<input type="text" name="status" class="form-control" value='<?php echo $post['post_status'] ?>'>-->
                         </div>
                         <div class="form-group">
                             <label for="image">Post Image</label>
-                            <input type="file" name="image" class="form-control" value='<?php echo $post['post_image'] ?>'>
+                            <input type="file" name="image" class="form-control"
+                                   value='<?php echo $post['post_image'] ?>'>
                         </div>
                         <div class="form-group">
                             <img width="100" src='<?php echo "../images/" . $post['post_image'] ?>' alt="post image">
                         </div>
                         <div class="form-group">
                             <label for="tags">Post Tags</label>
-                            <input type="text" name="tags" class="form-control" value='<?php echo $post['post_tags'] ?>'>
+                            <input type="text" name="tags" class="form-control"
+                                   value='<?php echo $post['post_tags'] ?>'>
                         </div>
                         <div class="form-group">
                             <label for="content">Post Content</label>
-                            <textarea name="content" class="form-control" cols="30" rows="5"><?php echo $post['post_text'] ?></textarea>
+                            <textarea name="content" class="form-control" cols="30"
+                                      rows="5"><?php echo $post['post_text'] ?></textarea>
                         </div>
-                        <button name="edit_post" style="margin-bottom: 4rem;" type="submit" class="btn btn-primary">Edit Post</button>
+                        <button name="edit_post" style="margin-bottom: 4rem;" type="submit" class="btn btn-primary">Edit
+                            Post
+                        </button>
                     </form>
 
                 </div>

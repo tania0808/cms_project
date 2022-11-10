@@ -35,8 +35,6 @@ $posts = array_chunk($posts, 2);
                             }
                             ?>
                         </p>
-                        <a class="btn btn-primary" href="post.php?id=<?php echo $featuredPost['post_id']; ?>">Read more
-                            →</a>
                     </div>
                 </div>
                 <!-- Nested row for non-featured blog posts-->
@@ -66,8 +64,6 @@ $posts = array_chunk($posts, 2);
                                             }
                                             ?>
                                         </p>
-                                        <a class="btn btn-primary" href="post.php?id=<?php echo $post['post_id']; ?>">Read
-                                            more →</a>
                                     </div>
                                 </div>
                             <?php } ?>

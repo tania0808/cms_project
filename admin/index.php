@@ -121,6 +121,7 @@
                 </div>
                 <!-- /.row -->
                 <?php
+                $publishedPosts = count(getPostsByStatus('Published'));
                 $draftPosts = count(getPostsByStatus('Draft'));
                 $disapprovedComments = count(getCommentsByStatus('disapproved'));
                 $subscribers = count(getUsersByRole('Subscriber'));
@@ -135,8 +136,8 @@
                             var data = google.visualization.arrayToDataTable([
                                 ['Data', 'Count'],
                                 <?php
-                                $element_text = ['Active Posts', 'Draft Posts', 'Comments', 'Pending Comments', 'Users', 'Subscribers', 'Categories'];
-                                $element_count = [$posts, $draftPosts, $comments, $disapprovedComments , $users, $subscribers, $categories];
+                                $element_text = ['All Posts', 'Published Posts', 'Draft Posts', 'Comments', 'Pending Comments', 'Users', 'Subscribers', 'Categories'];
+                                $element_count = [$posts, $publishedPosts, $draftPosts, $comments, $disapprovedComments , $users, $subscribers, $categories];
                                 for($i = 0; $i < count($element_count); $i++) {
                                     echo "['{$element_text[$i]}'" . "," . "{$element_count[$i]}],";
                                 }

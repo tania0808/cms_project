@@ -17,6 +17,7 @@
 
                     if(isset($_POST['create_user'])){
                         addUser();
+                        echo "User created ! 😀 " . "<a href='admin-users.php'>View users</a>";
                     }
                     ?>
                     <h1 class="page-header">

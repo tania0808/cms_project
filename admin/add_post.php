@@ -59,7 +59,7 @@
                         </div>
                         <div class="form-group">
                             <label for="post_content">Content</label>
-                            <textarea name="content" class="form-control" cols="30" rows="10"></textarea>
+                            <textarea id="summernote" name="editordata"></textarea>
                         </div>
                         <button name="create_post" style="margin-bottom: 4rem;" type="submit" class="btn btn-primary">Add Post</button>
                     </form>

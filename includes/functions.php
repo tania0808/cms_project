@@ -221,6 +221,15 @@ function searchPostsByCategory(): bool|array
 
 }
 
+function changePostStatus($id, $action)
+{
+    global $database_connection;
+    $status = $action === 'Draft' ? 'Draft' : 'Published';
+    $query = "UPDATE posts SET post_status = '$status'  WHERE post_id = '$id'";
+    $changeStatus = $database_connection->prepare($query);
+    $changeStatus->execute();
+}
+
 
 // COMMENTS
 function getComments(): bool|array
