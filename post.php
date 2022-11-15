@@ -9,22 +9,29 @@
             <!-- Blog Post -->
             <?php include_once 'includes/functions.php';
             $id = $_GET['id'];
+            $author = $_POST['comment_author'];
+            $email = $_POST['comment_email'];
+            $content = $_POST['comment_content'];
             $post = getOnePost($id);
 
-            if(isset($_POST['create_comment'])) {
-                addComment();
+            if (isset($_POST['create_comment'])) {
+                if (!empty($author) && !empty($email) && !empty($content)) {
+                    addComment();
+                } else {
+                    echo "<script> alert('Data cannot be empty !') </script>";
+                }
             }
             ?>
-            <h2><?php echo $post['post_title']?></h2>
+            <h2><?php echo $post['post_title'] ?></h2>
             <p class="lead">
-                by <?php echo $post['post_author']?>
+                by <?php echo $post['post_author'] ?>
             </p>
             <hr>
-            <p>Posted on <?php echo $post['post_date']?></p>
+            <p>Posted on <?php echo $post['post_date'] ?></p>
             <hr>
-            <img width="300" class="img-responsive" src="images/<?php echo $post['post_image']?>" alt="">
+            <img width="300" class="img-responsive" src="images/<?php echo $post['post_image'] ?>" alt="">
             <hr>
-            <p><?php echo $post['post_text']?></p>
+            <p><?php echo $post['post_text'] ?></p>
             <!-- Blog Comments -->
             <!-- Posted Comments -->
             <!-- Comments Form -->
@@ -56,32 +63,32 @@
                     ?>
 
                     <?php foreach ($comments as $comment) { ?>
-                    <div class="card shadow-0 border" style="background-color: #f0f2f5;">
-                        <div class="card-body p-4">
-                            <div class="card mb-4">
-                                <div class="card-body">
-                                    <p><?php echo $comment['comment_content'] ?></p>
+                        <div class="card shadow-0 border" style="background-color: #f0f2f5;">
+                            <div class="card-body p-4">
+                                <div class="card mb-4">
+                                    <div class="card-body">
+                                        <p><?php echo $comment['comment_content'] ?></p>
 
-                                    <div class="d-flex justify-content-between">
-                                        <div class="d-flex flex-row align-items-center">
-                                            <img
-                                                    src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/img%20(4).webp"
-                                                    alt="avatar"
-                                                    width="25"
-                                                    height="25"
-                                            />
-                                            <p class="small mb-0 ms-2"><?php echo $comment['comment_author'] ?></p>
-                                        </div>
-                                        <div class="d-flex flex-row align-items-center">
-                                            <p class="small text-muted mb-0"><?php echo $comment['comment_date'] ?></p>
+                                        <div class="d-flex justify-content-between">
+                                            <div class="d-flex flex-row align-items-center">
+                                                <img
+                                                        src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/img%20(4).webp"
+                                                        alt="avatar"
+                                                        width="25"
+                                                        height="25"
+                                                />
+                                                <p class="small mb-0 ms-2"><?php echo $comment['comment_author'] ?></p>
+                                            </div>
+                                            <div class="d-flex flex-row align-items-center">
+                                                <p class="small text-muted mb-0"><?php echo $comment['comment_date'] ?></p>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <hr>
-                    <?php
+                        <hr>
+                        <?php
                     };
                     ?>
 

@@ -13,7 +13,10 @@ include_once 'includes/functions.php';
                 }
                 ?>
                 <li class='nav-item'><a class='nav-link' href='admin'>Admin</a></li>
-                </ul>
+                <li class='nav-item'><a class='nav-link' href='registration.php'>Registration</a></li>
+                <li class='nav-item'><a class='nav-link' href='login.php'>Login</a></li>
+
+            </ul>
         </div>
     </div>
 </nav>

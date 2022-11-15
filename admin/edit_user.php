@@ -1,4 +1,6 @@
-<?php include_once 'templates/head.php'; ?>
+<?php include_once 'templates/head.php';
+ob_start();
+?>
 <body>
 
 <div id="wrapper">

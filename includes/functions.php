@@ -335,6 +335,62 @@ function getOneUser($id)
     return $getUser->fetch();
 }
 
+function registration()
+{
+    global $database_connection;
+    $username = $_POST['username'];
+    $email = $_POST['email'];
+    $password = $_POST['password'];
+    $password = password_hash($password, PASSWORD_DEFAULT);
+    $query = <<<SQL
+        INSERT INTO users (user_name, user_email , user_password) 
+        VALUES (:username, :email, :password)
+    SQL;
+
+    $registerUser = $database_connection->prepare($query);
+    $registerUser->bindValue('username', $username);
+    $registerUser->bindValue('email', $email);
+    $registerUser->bindValue('password', $password);
+    return $registerUser->execute();
+}
+
+function login(): void
+{
+    global $database_connection;
+    $email = $_POST['email'];
+    $password = $_POST['password'];
+
+    $query = <<<SQL
+        SELECT * FROM users
+        WHERE user_email = '$email'
+    SQL;
+
+    $login = $database_connection->prepare($query);
+    $login->execute();
+
+    $res = $login->fetch(PDO::FETCH_ASSOC);
+
+    if ($res) {
+        $passwordHash = $res['user_password'];
+        if (password_verify($password, $passwordHash)) {
+            echo "Successful connection ! 😇";
+            $_SESSION['user_id'] = $res['user_id'];
+            $_SESSION['username'] = $res['user_name'];
+            $_SESSION['first_name'] = $res['user_first_name'];
+            $_SESSION['last_name'] = $res['user_last_name'];
+            $_SESSION['user_role'] = $res['user_role'];
+            header('Location: admin/index.php');
+        } else {
+            echo "Bad credentials !😥";
+            header('Location: index.php');
+        }
+    } else {
+        echo "Bad credentials !😥";
+        header('Location: index.php');
+    }
+
+}
+
 function addUser(): bool|array
 {
     global $database_connection;

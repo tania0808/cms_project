@@ -1,3 +1,10 @@
+<?php
+ob_start();
+session_start();
+if (isset($_POST['login'])) {
+    login();
+}
+?>
 <div class="card mb-4">
     <div class="card-header">Search</div>
     <div class="card-body">
@@ -9,15 +16,15 @@
         </div>
     </div>
 </div>
-
+<!-- LOGIN FORM -->
 <div class="card mb-4">
     <div class="card-header">LOGIN</div>
     <div class="card-body">
-        <form action="../login.php" method="post">
+        <form action="" method="post">
             <div class="form-group">
                 <label for="username"></label>
-                <input name="username" class="form-control" type="text" placeholder="Enter username"
-                       aria-label="Enter username" aria-describedby="button-search"/>
+                <input name="email" class="form-control" type="email" placeholder="Enter email"
+                       aria-label="Enter email" />
             </div>
             <div class="form-group">
                 <label for="password"></label>
