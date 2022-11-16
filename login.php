@@ -6,7 +6,11 @@
 <div class="container" style="margin-top: 4rem;">
     <?php
     if(isset($_POST['login'])) {
-     login();
+        if(!empty($_POST['email']) && !empty($_POST['password'])) {
+            login();
+        } else {
+            echo "Data can't be empty !!! 👩‍💻";
+        }
     }
     ?>
     <section id="login">

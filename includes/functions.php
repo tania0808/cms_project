@@ -437,6 +437,7 @@ function updateUser($id): void
     $username = $_POST['username'];
     $email = $_POST['email'];
     $password = $_POST['password'];
+    $password = password_hash($password, PASSWORD_DEFAULT);
     $image = 'earth.jpeg';
 
     $query = <<<SQL
