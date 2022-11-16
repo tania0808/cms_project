@@ -5,6 +5,10 @@ if (isset($_GET['delete_id'])) {
     deletePost($_GET['delete_id']);
     header("Location: admin-posts.php");
 }
+if (isset($_GET['reset'])) {
+    resetPostViews($_GET['reset']);
+    header("Location: admin-posts.php");
+}
 ?>
 <?php include_once 'templates/head.php'; ?>
 <body>
@@ -85,6 +89,7 @@ if (isset($_GET['delete_id'])) {
                                 <th>Image</th>
                                 <th>Tags</th>
                                 <th>Comments</th>
+                                <th>Views</th>
                                 <th>Date</th>
                                 <th>Edit</th>
                                 <th>Delete</th>
@@ -110,6 +115,7 @@ if (isset($_GET['delete_id'])) {
                                     </td>
                                     <td><?php echo $post['post_tags'] ?></td>
                                     <td><?php echo $post['post_comments_count'] ?></td>
+                                    <td><a href="admin-posts.php?reset=<?php echo $post['post_id'] ?>"><?php echo $post['post_views_count'] ?></a></td>
                                     <td><?php echo $post['post_date'] ?></td>
                                     <td><a href="edit_post.php?edit_id=<?php echo $post['post_id'] ?>">edit</a></td>
                                     <td><a href="admin-posts.php?delete_id=<?php echo $post['post_id'] ?>">delete</a>

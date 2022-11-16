@@ -9,6 +9,7 @@
             <!-- Blog Post -->
             <?php include_once 'includes/functions.php';
             $id = $_GET['id'];
+            incrementPostViews($id);
             $post = getOnePost($id);
 
             if (isset($_POST['create_comment'])) {

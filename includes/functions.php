@@ -242,6 +242,28 @@ function changePostStatus($id, $action)
     $changeStatus->execute();
 }
 
+function incrementPostViews($post_id) {
+    global $database_connection;
+    $updatePostViews = <<<SQL
+        UPDATE posts
+        SET post_views_count = post_views_count + 1
+        WHERE post_id = '$post_id'
+    SQL;
+    $updateViewsCount = $database_connection->prepare($updatePostViews);
+    $updateViewsCount->execute();
+}
+
+function resetPostViews($post_id) {
+    global $database_connection;
+    $updatePostViews = <<<SQL
+        UPDATE posts
+        SET post_views_count = 0
+        WHERE post_id = '$post_id'
+    SQL;
+    $resetViewsCount = $database_connection->prepare($updatePostViews);
+    $resetViewsCount->execute();
+}
+
 
 function copyAPost($id)
 {
