@@ -9,12 +9,12 @@
             <!-- Blog Post -->
             <?php include_once 'includes/functions.php';
             $id = $_GET['id'];
-            $author = $_POST['comment_author'];
-            $email = $_POST['comment_email'];
-            $content = $_POST['comment_content'];
             $post = getOnePost($id);
 
             if (isset($_POST['create_comment'])) {
+                $author = $_POST['comment_author'];
+                $email = $_POST['comment_email'];
+                $content = $_POST['comment_content'];
                 if (!empty($author) && !empty($email) && !empty($content)) {
                     addComment();
                 } else {

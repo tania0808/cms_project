@@ -45,6 +45,10 @@ if (isset($_GET['delete_id'])) {
                                     deletePost($checkBoxValue);
                                     break;
                                 }
+                                case 'Clone': {
+                                    copyAPost($checkBoxValue);
+                                    break;
+                                }
 
                             }
 
@@ -65,6 +69,7 @@ if (isset($_GET['delete_id'])) {
                                     <option value="Draft">Draft</option>
                                     <option value="Published">Published</option>
                                     <option value="Delete">Delete</option>
+                                    <option value="Clone">Clone</option>
                                 </select>
                                 <button class="btn btn-success" name="submit">Apply</button>
                                 <a href="add_post.php" class="btn btn-primary">Add New</a>

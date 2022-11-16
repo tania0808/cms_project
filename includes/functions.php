@@ -221,6 +221,18 @@ function searchPostsByCategory(): bool|array
 
 }
 
+function searchPostsByAuthor(): bool|array
+{
+    global $database_connection;
+    $author = $_GET['author'];
+    $query = "SELECT * FROM posts WHERE post_author = '$author'";
+    $searchStatement = $database_connection->prepare($query);
+    $searchStatement->execute();
+
+    return $searchStatement->fetchAll();
+
+}
+
 function changePostStatus($id, $action)
 {
     global $database_connection;
@@ -230,6 +242,20 @@ function changePostStatus($id, $action)
     $changeStatus->execute();
 }
 
+
+function copyAPost($id)
+{
+    global $database_connection;
+    $query = <<<SQL
+        INSERT INTO posts (post_category_id, post_title, post_date, post_author, post_user, post_image, post_text, post_tags, post_comments_count, post_status )  
+        SELECT post_category_id, post_title, post_date, post_author, post_user, post_image, post_text, post_tags, post_comments_count, post_status 
+        FROM posts 
+        WHERE post_id = '$id'
+    SQL;
+
+    $copyPost = $database_connection->prepare($query);
+    $copyPost->execute();
+}
 
 // COMMENTS
 function getComments(): bool|array

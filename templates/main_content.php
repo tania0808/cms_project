@@ -23,9 +23,8 @@ if(!$posts) { ?>
                                     href="post.php?id=<?php echo $featuredPost['post_id']; ?>"><?php echo $featuredPost['post_title'] ?></a>
                         </h2>
                         <div class="small text-muted"><?php echo $featuredPost['post_date'] ?></div>
-                        <div class="small">by <span
-                                    class="text-primary"><?php echo $featuredPost['post_author'] ?></span></div>
-                        <p class="card-text"><?php
+                        <div class="small">by <a href="posts_by_author.php?author=<?php echo $featuredPost['post_author'] ?>"
+                                                 class="text-primary"><?php echo $featuredPost['post_author'] ?></a></div><p class="card-text"><?php
                             $text = $featuredPost['post_text'];
                             $n_char = 50;
                             if (strlen($text) > $n_char) {
@@ -52,8 +51,8 @@ if(!$posts) { ?>
                                                     href="post.php?id=<?php echo $post['post_id']; ?>"><?php echo $post['post_title'] ?></a>
                                         </h2>
                                         <div class="small text-muted"><?php echo $post['post_date'] ?></div>
-                                        <div class="small">by <span
-                                                    class="text-primary"><?php echo $post['post_author'] ?></span></div>
+                                        <div class="small">by <a href="../posts_by_author.php?author=<?php echo $post['post_author'] ?>"
+                                                    class="text-primary"><?php echo $post['post_author'] ?></a></div>
                                         <p class="card-text"><?php
                                             $text = $post['post_text'];
                                             $n_char = 50;
@@ -79,7 +78,6 @@ if(!$posts) { ?>
                 <!-- Search widget-->
                 <?php include_once 'templates/search.php' ?>
                 <!-- Login Form -->
-                <?php include_once './login.php' ?>
                 <!-- Categories widget-->
                 <?php include_once 'templates/categories.php' ?>
                 <!-- Side widget-->

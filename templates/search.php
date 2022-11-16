@@ -1,6 +1,5 @@
 <?php
 ob_start();
-session_start();
 if (isset($_POST['login'])) {
     if(!empty($_POST['email']) && !empty($_POST['password'])) {
         login();

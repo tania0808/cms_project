@@ -2,7 +2,7 @@
 session_start();
 include_once '../includes/functions.php';
 if((!isset($_SESSION['user_role'])) || ($_SESSION['user_role'] === "Subscriber")) {
-    //header('Location: ../index.php');
+    header('Location: ../index.php');
     echo "No session !";
     var_dump($_SESSION);
 }
