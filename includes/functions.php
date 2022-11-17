@@ -86,6 +86,19 @@ function getPublishedPosts(): bool|array
     return $getPosts->fetchAll();
 }
 
+function getPublishedPostsPerPage($currentPage): bool|array
+{
+    global $database_connection;
+    $perPage = 5;
+    $first = ($currentPage * $perPage) - $perPage;
+    $query = 'SELECT * FROM posts WHERE post_status = "Published" LIMIT :first, 5';
+    $getPosts = $database_connection->prepare($query);
+    $getPosts->bindValue(':first', $first);
+    $getPosts->execute();
+
+    return $getPosts->fetchAll();
+}
+
 function getOnePost($id)
 {
     global $database_connection;

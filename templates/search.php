@@ -20,6 +20,15 @@ if (isset($_POST['login'])) {
     </div>
 </div>
 <!-- LOGIN FORM -->
+<?php
+if(isset($_SESSION['username'])) { ?>
+<div class="card mb-4">
+    <div class="card-header">LOGIN</div>
+    <div class="card-body">
+        Logined as <span class="text-primary"><?php echo $_SESSION['username']; ?></span>
+    </div>
+</div>
+<?php } else { ?>
 <div class="card mb-4">
     <div class="card-header">LOGIN</div>
     <div class="card-body">
@@ -38,3 +47,4 @@ if (isset($_POST['login'])) {
         </form>
     </div>
 </div>
+<?php } ?>
