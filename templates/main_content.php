@@ -1,15 +1,11 @@
 <?php
 include_once 'includes/functions.php';
 ?>
-    <!-- Featured blog post-->
 <?php
 $posts = getPublishedPostsPerPage($_GET['page']);
 
 $postsCount = count(getPublishedPosts());
 $pageNumber = ceil($postsCount / 5);
-echo 'Number of posts: ' . $postsCount . '<br>';
-echo 'Number of pages: ' . $pageNumber . '<br>';
-
 
 if (!$posts) { ?>
     <h3>There are no posts ! </h3>
@@ -44,7 +40,6 @@ if (!$posts) { ?>
                                                            href="index.php?page=<?php echo $i ?>"><?php echo $i; ?></a>
                                 </li>
                             <?php } ?>
-                            <!--<li class="page-item active" aria-current="page"><a class="page-link" href="#!"><?php echo $i; ?></a></li>-->
                             <!-- <?php if ($_GET['page'] == $pageNumber) {
                                 echo "disabled";
                             } ?> -->
@@ -67,9 +62,6 @@ if (!$posts) { ?>
                                                   src="./images/<?php echo $post['post_image'] ?>" alt="..."/></a>
                                 <div class="card-body">
                                     <h1><?php echo $post['post_id']; ?></h1>
-                                    <h2 class="card-title h4"><a
-                                                href="post.php?id=<?php echo $post['post_id']; ?>"><?php echo $post['post_title'] ?></a>
-                                    </h2>
                                     <div class="small text-muted"><?php echo $post['post_date'] ?></div>
                                     <div class="small">by <a
                                                 href="../posts_by_author.php?author=<?php echo $post['post_author'] ?>"
@@ -106,7 +98,6 @@ if (!$posts) { ?>
                     </ul>
                 </nav>
             </div>
-        </div>
         <!-- Side widgets-->
         <div class="col-lg-4">
             <!-- Search widget-->
@@ -116,6 +107,7 @@ if (!$posts) { ?>
             <?php include_once 'templates/categories.php' ?>
             <!-- Side widget-->
             <?php include_once 'templates/side_card.php' ?>
+        </div>
         </div>
     </div>
     <!-- Nested row for non-featured blog posts-->

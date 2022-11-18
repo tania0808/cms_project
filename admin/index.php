@@ -2,6 +2,9 @@
 <body>
 
     <div id="wrapper">
+        <?php
+
+        ?>
 
         <!-- Navigation -->
         <?php include_once 'templates/admin_navbar.php'?>
@@ -22,8 +25,7 @@
 
                     </div>
                 </div>
-                <?php include_once '../includes/functions.php';
-
+                <?php
                 $posts = count(getPosts());
                 $comments = count(getComments());
                 $users = count(getAllUsers());

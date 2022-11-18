@@ -34,7 +34,7 @@
             <hr>
             <p><?php echo $post['post_text'] ?></p>
             <!-- Blog Comments -->
-            <!-- Posted Comments -->
+
             <!-- Comments Form -->
             <div class="well mt-5 pt-5">
                 <h4>Leave a Comment:</h4>
@@ -56,6 +56,7 @@
                     <button type="submit" name="create_comment" class="btn btn-primary">Submit</button>
                 </form>
             </div>
+            <!-- Posted Comments -->
             <div class="row d-flex justify-content-start mt-5">
                 <div class="col-md-10 col-lg-10">
                     <?php

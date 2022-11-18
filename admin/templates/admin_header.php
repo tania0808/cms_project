@@ -2,7 +2,7 @@
 session_start();
 include_once '../includes/functions.php';
 if((!isset($_SESSION['user_role'])) || ($_SESSION['user_role'] === "Subscriber")) {
-    header('Location: ../index.php');
+    header('Location: ../index.php?page=1');
     echo "No session !";
     var_dump($_SESSION);
 }
@@ -19,8 +19,15 @@ $user = getOneUser($_SESSION['user_id']);
     <a class="navbar-brand" href="index.php">CMS Admin</a>
 </div>
 <ul class="nav navbar-right top-nav">
+    <?php
+    include_once '../includes/functions.php';
+    $online = usersOnline();
+    ?>
+    <li class="navbar-brand">
+        Users Online: <?php echo $online; ?>
+    </li>
     <li>
-        <a class="navbar-brand" href="../index.php">HOME</a>
+        <a class="navbar-brand" href="../index.php?page=1">HOME</a>
     </li>
 
     <li class="dropdown">

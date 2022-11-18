@@ -440,7 +440,9 @@ function login(): void
             $_SESSION['first_name'] = $res['user_first_name'];
             $_SESSION['last_name'] = $res['user_last_name'];
             $_SESSION['user_role'] = $res['user_role'];
+            addUserOnline();
             header('Location: admin/index.php');
+
         } else {
             echo "Bad credentials !😥";
             header('Location: index.php');
@@ -550,4 +552,66 @@ function getUsersByRole($role): bool|array
     $getUsers->execute();
 
     return $getUsers->fetchAll();
+}
+
+function addUserOnline() {
+    global $database_connection;
+    $session = session_id();
+    $time = time();
+    $addUserOnlineQuery = <<<SQL
+            INSERT INTO users_online (session, time)
+            VALUES (:session, :time)
+        SQL;
+    $addUserOnline = $database_connection->prepare($addUserOnlineQuery);
+    $addUserOnline->bindValue(':session', $session);
+    $addUserOnline->bindValue(':time', $time);
+    $addUserOnline ->execute();
+}
+
+
+function usersOnline() {
+    global $database_connection;
+    $session = session_id();
+    $time = time();
+    $time_out_in_seconds = 60;
+    $time_out = $time - $time_out_in_seconds;
+
+    $query = <<<SQL
+        SELECT * FROM users_online 
+        WHERE session = :session
+    SQL;
+    $getUsers = $database_connection->prepare($query);
+    $getUsers->bindValue(':session', $session);
+    $getUsers->execute();
+
+    if($getUsers->fetchAll() === NULL){
+        $addUserOnlineQuery = <<<SQL
+            INSERT INTO users_online (session, time)
+            VALUES (:session, :time)
+        SQL;
+        $addUserOnline = $database_connection->prepare($addUserOnlineQuery);
+        $addUserOnline->bindValue(':session', $session);
+        $addUserOnline->bindValue(':time', $time);
+        $addUserOnline ->execute();
+    } else {
+        $updateUserOnlineQuery = <<<SQL
+            UPDATE users_online
+            SET time = $time 
+            WHERE session = :session
+        SQL;
+        $updateUserOnline = $database_connection->prepare($updateUserOnlineQuery);
+        $updateUserOnline->bindValue(':session', $session);
+        $updateUserOnline->execute();
+    }
+
+    $usersOnline = <<<SQL
+        SELECT * FROM users_online
+        WHERE time > $time_out
+    SQL;
+    $getUsersOnline = $database_connection->prepare($usersOnline);
+    $getUsersOnline->execute();
+
+
+    return count($getUsersOnline->fetchAll());
+
 }
